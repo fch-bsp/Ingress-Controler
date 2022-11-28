@@ -1,0 +1,104 @@
+# Manifesto deployment aplicação blue
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-blue
+spec:
+  selector:
+    matchLabels:
+      app: web-blue
+  template:
+    metadata:
+      labels:
+        app: web-blue  
+    spec:
+      containers:
+      - name: web
+        image: fabricioveronez/web-page:blue
+        resources: {}
+        ports:
+        - containerPort: 80
+---
+# Manifesto service aplicação blue
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-blue
+spec:
+  selector:
+    app: web-blue
+  ports:
+  - port: 80
+    targetPort: 80
+---
+# Manifesto deployment aplicação green
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-green
+spec:
+  selector:
+    matchLabels:
+      app: web-green
+  template:
+    metadata:
+      labels:
+        app: web-green
+    spec:
+      containers:
+      - name: web
+        image: fabricioveronez/web-page:green
+        resources: {}
+        ports:
+        - containerPort: 80
+---
+# Manifesto service aplicação green
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-green
+spec:
+  selector:
+    app: web-green
+  ports:
+  - port: 80
+    targetPort: 80
+---
+# Manifesto deployment do nginx 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: web
+        image: nginx
+        resources: {}
+        ports:
+        - containerPort: 80
+---
+
+# Manifesto service do  nginx 
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+spec:
+  selector:
+    app: nginx
+  ports:
+  - port: 80
+    targetPort: 80
+
+
+
+## acesso apilcação local: kubectl port-forward  service/web-blue 8080:80    
+# http://localhost:8080/

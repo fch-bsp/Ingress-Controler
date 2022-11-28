@@ -1,0 +1,64 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: path-ingress # primerira mudança
+  annotations:  # criação de regra de rota 
+    nginx.ingress.kubernetes.io/rewrite-target: / # outra mudança
+  # namespace: default
+spec:
+  ingressClassName: nginx
+  rules:
+  - http: 
+      paths:
+      - path: /blue # outra mudança
+        pathType: Prefix
+        backend:
+          service:
+            name: web-blue
+            port:
+              number: 80                  
+      - path: /green  # outra mudança
+        pathType: Prefix
+        backend:
+          service:
+            name: web-green
+            port:
+              number: 80                  
+--- 
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dominio-ingress # primerira mudança
+  annotations:  # combinar as duas formas http://127.0.0.1.nip.io/blue ou http://blue.127.0.0.1.nip.io
+    nginx.ingress.kubernetes.io/rewrite-target: / # combinar as duas formas 
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: blue.127.0.0.1.nip.io # outra mudança definindo host especifico
+    http: 
+      paths:
+      - path: / # outra mudança 
+        pathType: Prefix
+        backend:
+          service:
+            name: web-blue
+            port:
+              number: 80                  
+  - host: green.127.0.0.1.nip.io # outra mudança definindo host especifico
+    http: 
+      paths:
+      - path: / # outra mudança 
+        pathType: Prefix
+        backend:
+          service:
+            name: web-green
+            port:
+              number: 80  
+
+# Acesso app com subdominio: http://green.127.0.0.1.nip.io/   ou http://blue.127.0.0.1.nip.io/     
+# Acesso app com subdominio: http://127.0.0.1.nip.io/blue     ou http://127.0.0.1.nip.io/green
+
+# lista qual ingress class 
+
+# kubectl get ingressclass

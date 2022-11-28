@@ -1,0 +1,100 @@
+01- primeiro criar aplicação k3d sem passar parametro 
+a. k3d cluster create
+
+Instalaçao do ingress controller bare-metal 
+02. wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.5.1/deploy/static/provider/baremetal/deploy.yaml
+a. kubectl apply -f deploy-ingress-controler.yaml 
+
+03. Lista ingress-controller
+a. kubectl get all -n ingress-nginx
+b. kubectl port-forward  service/ingress-nginx-controller 8080:80 -n ingress-nginx
+c. http://localhost:8080/
+
+matar : k3d cluster delete --all 
+
+
+===============================>   ===============================> ============================>
+
+
+
+@@@@@@@@@ Criação do cluster com k3d de forma correta  @@@@@@@
+
+
+1. k3d cluster create -p "80:30000@loadbalancer"
+1.1 kubectl get nodes
+1.2 k3d cluster list 
+
+Instalaçao do ingress controller bare-metal 
+02. wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.5.1/deploy/static/provider/baremetal/deploy.yaml
+a. kubectl apply -f deploy-ingress-controler.yaml 
+b. kubectl get svc -n ingress-nginx
+ # https://nip.io/ 
+    # http://127.0.0.1.nip.io/
+
+
+
+
+Instalar aplicação
+3. kubectl appy -f deployment-app.yaml
+a. kubectl get all  -> lista aplicação 
+b  kubectl get all -n ingress-nginx
+c. kubectl get svc -n ingress-nginx  -> lista aplicação 
+
+acessa aplicação:
+kubectl port-forward  service/web-blue 8080:80  
+http://localhost:8080/
+
+Instalação do (INGRESS)
+a. kubectl apply -f ingress.yaml
+
+http://127.0.0.1.nip.io 
+http://localhost/
+
+erro: ingressClassName:
+
+http://127.0.0.1.nip.io 
+http://localhost/
+
+
+
+kubectl get ingress
+
+NAME              CLASS   HOSTS                                          ADDRESS      PORTS   AGE
+path-ingress      nginx   *                                              172.26.0.2   80      60m
+padrao-ingress    nginx   *                                              172.26.0.2   80      60m
+dominio-ingress   nginx   blue.127.0.0.1.nip.io,green.127.0.0.1.nip.io   172.26.0.2   80      60m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+lista qual ingress class 
+4.kubectl get ingressclass
+
+
+
+dicas: 
+
+endereço parainstalar o ingress-controller
+https://github.com/kubernetes/ingress-nginx
+https://kubernetes.github.io/ingress-nginx/deploy/#bare-metal-clusters
+
+
+Precisar liberar porta 80
+
+sudo netstat -nlptu | grep 80
+sudo systemctl stop nginx
+sudo systemctl stop apache2
+

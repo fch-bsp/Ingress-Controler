@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-blue
+spec:
+  selector:
+    matchLabels:
+      app: web-blue
+  template:
+    metadata:
+      labels:
+        app: web-blue
+    spec:
+      containers:
+      - name: web
+        image: fabricioveronez/web-page:blue
+        resources: {}
+        ports:
+        - containerPort: 80
