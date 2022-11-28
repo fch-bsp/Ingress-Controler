@@ -1,5 +1,6 @@
 01- primeiro criar aplicação k3d sem passar parametro 
 a. k3d cluster create
+b. k3d cluster list
 
 Instalaçao do ingress controller bare-metal 
 02. wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.5.1/deploy/static/provider/baremetal/deploy.yaml
@@ -40,12 +41,16 @@ a. kubectl get all  -> lista aplicação
 b  kubectl get all -n ingress-nginx
 c. kubectl get svc -n ingress-nginx  -> lista aplicação 
 
+
 acessa aplicação:
 kubectl port-forward  service/web-blue 8080:80  
 http://localhost:8080/
 
+
+
 Instalação do (INGRESS)
 a. kubectl apply -f ingress.yaml
+kubectl get ingressclass
 
 http://127.0.0.1.nip.io 
 http://localhost/

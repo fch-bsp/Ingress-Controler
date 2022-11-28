@@ -82,5 +82,5 @@ spec:
 # Acesso app com padrão: http://127.0.0.1.nip.io/       
 
 # lista qual ingress class 
-
+# kubectl get ingress
 # kubectl get ingressclass

@@ -60,5 +60,5 @@ spec:
 # Acesso app com subdominio: http://127.0.0.1.nip.io/blue     ou http://127.0.0.1.nip.io/green
 
 # lista qual ingress class 
-
+# kubectl get ingress
 # kubectl get ingressclass

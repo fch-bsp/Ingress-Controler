@@ -20,18 +20,23 @@ spec:
 
 
 
-# Acesso app :  http://127.0.0.1.nip.io             
+        
 
 
 
-### conceito do ingress class  => Todo ingress é vinclulado ao ingress controle  regra de rota ### 
+# Instalação do (INGRESS)
+#  kubectl apply -f ingress.yaml
+#  kubectl get ingressclass
 
+# Acesso app :  http://127.0.0.1.nip.io     ou    http://localhost/
 
-# saber quantos ingress class tenho no meu ambinente 
-
+# listando o manifesto ingress-controle
 # kubectl get ingress
 
-# NAME              CLASS    HOSTS   ADDRESS      PORTS   AGE
-# simples-ingress   <none>   *       172.21.0.2   80      4m36s
+# listando o ingress-class
+#  kubectl get ingressclass
 
-# kubectl get ingressclass
+# INCLUIR NUMA ROTA 
+
+
+#  kubectl apply -f ingress.yaml

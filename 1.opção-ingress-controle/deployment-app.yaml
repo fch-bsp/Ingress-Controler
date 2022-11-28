@@ -98,7 +98,16 @@ spec:
   - port: 80
     targetPort: 80
 
-
+    
 
 ## acesso apilcação local: kubectl port-forward  service/web-blue 8080:80    
 # http://localhost:8080/
+
+
+# Instalação do (INGRESS)
+#  kubectl apply -f ingress.yaml
+#  kubectl get ingressclass
+
+
+
+# kubectl get ingress

@@ -25,10 +25,24 @@ spec:
             port:
               number: 80                  
 
-
+# Instalação do (INGRESS)
 
 # Acesso app : http://127.0.0.1.nip.io/green   ou  http://127.0.0.1.nip.io/blue         
 
-# lista qual ingress class 
 
-# kubectl get ingressclass
+
+#  kubectl apply -f ingress.yaml
+#  kubectl get ingressclass
+
+# Acesso app :  http://127.0.0.1.nip.io     ou    http://localhost/
+
+# listando o manifesto ingress-controle
+# kubectl get ingress
+
+# listando o ingress-class
+#  kubectl get ingressclass
+
+# INCLUIR NUMA ROTA 
+
+
+#  kubectl apply -f ingress.yaml
